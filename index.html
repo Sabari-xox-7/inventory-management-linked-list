@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Stockroom | Inventory Manager</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <aside class="sidebar">
+    <div class="brand"><span class="brand-mark">S</span><span>Stockroom<small>INVENTORY MANAGER</small></span></div>
+    <p class="nav-label">WORKSPACE</p>
+    <a class="nav active" href="#dashboard">▦ <span>Overview</span></a>
+    <a class="nav" href="#inventory">▤ <span>Inventory</span></a>
+    <div class="sidebar-note"><div class="note-icon">✓</div><strong>Stay in control</strong><p>Keep product details and stock levels organised in one place.</p></div>
+    <div class="profile"><div class="avatar">SM</div><div><strong>Store Manager</strong><small>Local demo account</small></div></div>
+  </aside>
+  <main class="main" id="dashboard">
+    <header class="topbar"><div><p class="eyebrow">WORKSPACE / OVERVIEW</p><h1>Inventory overview</h1><p class="subheading">A simple view of what’s in your store today.</p></div><button class="primary" id="addTop">＋ Add product</button></header>
+    <section class="stats">
+      <article class="stat"><div class="stat-top"><span>Total products</span><span class="stat-icon purple">▤</span></div><strong id="totalProducts">0</strong><small>Unique items in your inventory</small></article>
+      <article class="stat"><div class="stat-top"><span>Units in stock</span><span class="stat-icon blue">▦</span></div><strong id="totalUnits">0</strong><small>Total quantity across products</small></article>
+      <article class="stat"><div class="stat-top"><span>Stock value</span><span class="stat-icon green">₹</span></div><strong id="stockValue">₹0</strong><small>Quantity × unit price</small></article>
+      <article class="stat"><div class="stat-top"><span>Low-stock items</span><span class="stat-icon orange">!</span></div><strong id="lowStock">0</strong><small>5 units or fewer remaining</small></article>
+    </section>
+    <section class="panel" id="inventory">
+      <div class="panel-heading"><div><h2>Product inventory</h2><p>Manage products, quantities and prices.</p></div><button class="secondary" id="exportBtn">↓ Export CSV</button></div>
+      <div class="toolbar"><label class="search">⌕ <input id="search" type="search" placeholder="Search by product name or ID…"></label><select id="filter"><option value="all">All stock levels</option><option value="low">Low stock (≤ 5)</option><option value="healthy">Healthy stock</option><option value="out">Out of stock</option></select></div>
+      <div class="table-wrap"><table><thead><tr><th>PRODUCT</th><th>ID</th><th>UNIT PRICE</th><th>QUANTITY</th><th>STOCK STATUS</th><th>ACTIONS</th></tr></thead><tbody id="productRows"></tbody></table>
+      <div class="empty hidden" id="empty"><div class="empty-icon">▤</div><strong>No products found</strong><p>Add a product or try another search.</p></div></div>
+      <div class="table-footer"><span id="resultCount">0 products</span><span>Changes are saved in this browser</span></div>
+    </section>
+    <footer>Stockroom · Beginner DSA project · Built with HTML, CSS, JavaScript and C</footer>
+  </main>
+  <dialog id="productDialog">
+    <form id="productForm">
+      <div class="modal-head"><div><p class="eyebrow">PRODUCT DETAILS</p><h2 id="modalTitle">Add a product</h2></div><button type="button" class="close" id="closeDialog" aria-label="Close">×</button></div>
+      <label>Product name<input id="name" required maxlength="50" placeholder="e.g. Notebook"></label>
+      <div class="form-row"><label>Product ID<input id="pid" required type="number" min="1" placeholder="e.g. 101"></label><label>Quantity<input id="quantity" required type="number" min="0" step="1" placeholder="e.g. 25"></label></div>
+      <label>Unit price (₹)<input id="price" required type="number" min="0" step="0.01" placeholder="e.g. 45.00"></label>
+      <p class="form-error" id="formError"></p>
+      <div class="modal-actions"><button type="button" class="secondary" id="cancelDialog">Cancel</button><button class="primary" type="submit">Save product</button></div>
+    </form>
+  </dialog>
+  <div class="toast" id="toast" role="status"></div>
+  <script src="app.js"></script>
+</body>
+</html>
